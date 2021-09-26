@@ -10,12 +10,43 @@
         <link rel="stylesheet" href="./assets/css/style.css">
     </head>
     <body>
-        <aside>
-            <h2>Search for a City:</h2>
-            <input type="text" id="city" name="city"> 
-            <button id="search-button">Search</button>
-        </aside>
-        
+        <header>
+            <h1>Weather Dashboard</h1>
+        </header>
+        <div class="container">
+            <aside id="search">
+                <h2>Search for a City:</h2>
+                <input type="text" id="city" name="city" placeholder="San Diego"> 
+                <button id="search-button">Search</button>
+                <div id="buttonPlaceholder">
+                    <!--Place for buttons to be attached-->
+                </div>
+            </aside>
+            <main id="mainPage" class="hidden">
+                <section id="currentWeather">
+                    <!--Current Weather will generate here-->
+                    <div>
+                        <h2 id="currentCity"></h2>
+                        <h2 id="currentTime"></h2>
+                        <img id="weatherIcon" src="" alt="Weather icon">   
+                    </div>
+                    <p>Temp: </p>
+                    <p>Wind: </p>
+                    <p>Humidity: </p>
+                    <p>UV index: </p>
+                </section>
+                <div id="fiveDayForecast">
+                    <h3>5 Day Forecast:</h3>
+                    <section id="section1"></section>
+                    <section id="section2"></section>
+                    <section id="section3"></section>
+                    <section id="section4"></section>
+                    <section id="section5"></section>
+                </div>
+            </main>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="./assets/js/script.js" async defer></script>
     </body>
 </html>

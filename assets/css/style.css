@@ -1,0 +1,96 @@
+header {
+    text-align: center;
+    background: rgb(6,5,82);
+    background: linear-gradient(to right, rgb(30, 97, 184) , rgb(44, 13, 102));
+    color: whitesmoke;
+    padding: 10px;
+    height: 80px;
+    line-height: 60px;
+    font-size: 200%;
+}
+
+main {
+    margin: 10px;
+    width: 100%;
+}
+
+h2 {
+    font-size: 175%;
+    margin-bottom: 10px;
+}
+
+h3, 
+h4 {
+    font-size: 150%;
+}
+
+#city {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    height: 40px;
+}
+
+#search-button {
+    width: 100%;
+    background-color: rgb(41, 99, 223);
+    color: whitesmoke;
+    border: none;
+    padding: 7px;
+    margin-bottom: 15px;
+}
+
+#search-button:hover {
+    background-color: rgb(44, 13, 102);
+    transition: all 0.5s ease-in;
+}
+
+.container {
+    display: flex;
+}
+
+#search,
+#currentWeather,
+#fiveDayForecast {
+    text-align: left;
+    margin: 10px;
+}
+
+#search {
+    align-self: stretch;
+}
+
+#buttonPlaceholder {
+    border-top: 3px solid rgb(11, 12, 53);
+}
+
+.newCity {
+    background-color: gray;
+    width: 100%;
+    border: none;
+    padding: 7px;
+    margin-bottom: 15px;
+}
+
+.newCity:hover {
+    background-color: rgb(41, 99, 223);
+    color: whitesmoke;
+}
+
+#currentWeather {
+    width: 100%;
+    border: solid 2px black;
+}
+
+#currentCity,
+#currentTime {
+    display: inline;
+}
+
+#weatherIcon {
+    vertical-align: middle;
+}
+
+.hidden {
+    display: none;
+}
