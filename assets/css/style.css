@@ -1,3 +1,7 @@
+body {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
 header {
     text-align: center;
     background: rgb(6,5,82);
@@ -78,8 +82,14 @@ h4 {
 }
 
 #currentWeather {
-    width: 100%;
+    width: 98%;
     border: solid 2px black;
+    padding-bottom: 20px;
+}
+
+#currentWeather p {
+    margin-bottom: 20px;
+    font-size: 18px;
 }
 
 #currentCity,
@@ -93,4 +103,33 @@ h4 {
 
 .hidden {
     display: none;
+}
+
+.favorable {
+    background-color: rgb(5, 71, 5);
+    max-width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+
+}
+
+.moderate {
+    background-color: rgb(187, 146, 14);
+    max-width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+}
+
+.severe {
+    background-color: rgb(122, 12, 12);
+    max-width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    color: whitesmoke;
+}
+
+.inline {
+    display: inline;
 }
