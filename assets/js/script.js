@@ -12,6 +12,7 @@ var uv = document.getElementById("uv");
 
 searchButton.addEventListener("click", getApi);
 
+
 function getApi() {
     var input = document.getElementById("city").value.trim();
     city = input;
@@ -38,20 +39,31 @@ function getApi() {
         temp.textContent = "Temp: " + data.main.temp + "\xB0F";
         wind.textContent = "Wind: " + data.wind.speed + " MPH";
         humidity.textContent = "Humidity: " + data.main.humidity + "%";
-        uv.textContent = ""
         lat = data.coord.lat;
         lon = data.coord.lon;
+        function fetchOneCall() {
+            var uvUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial";
+            // fetch request gets the data for the UV index
+            fetch(uvUrl)
+                .then(function (response) {
+                return response.json();
+                })
+                .then(function (data) {
+                console.log(data);
+                uv.textContent = data.current.uvi;
+                if (data.current.uvi < 3) {
+                    uv.className = "favorable inline";
+                } else if (data.current.uvi >=3 && data.current.uvi < 8) {
+                    uv.className = "moderate inline";
+                } else {
+                    uv.className = "severe inline";
+                }
+            });
+        }
+        fetchOneCall();
       });
 
-    var uvUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey + "&units=imperial";
-    // fetch request gets the data for the UV index
-    fetch(uvUrl)
-        .then(function (response) {
-        return response.json();
-        })
-        .then(function (data) {
-        console.log(data);
-        });
+    
 }
 
 function saveCities() {
