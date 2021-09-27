@@ -67,10 +67,11 @@ h4 {
 
 #buttonPlaceholder {
     border-top: 3px solid rgb(11, 12, 53);
+    padding-top: 20px;
 }
 
 .newCity {
-    background-color: gray;
+    background-color: rgb(172, 177, 189);
     width: 100%;
     border: none;
     padding: 7px;
@@ -85,7 +86,8 @@ h4 {
 #currentWeather {
     width: 98%;
     border: solid 2px black;
-    padding-bottom: 20px;
+    padding: 20px;
+    
 }
 
 #currentWeather p {

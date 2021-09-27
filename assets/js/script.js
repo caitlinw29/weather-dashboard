@@ -5,6 +5,7 @@ var lon;
 var searchButton = document.getElementById("search-button");
 var currentCity = document.getElementById("currentCity");
 var mainPage = document.getElementById("mainPage");
+var buttonPlaceholder = document.getElementById("buttonPlaceholder");
 var temp = document.getElementById("temp");
 var wind = document.getElementById("wind");
 var humidity = document.getElementById("humidity");
@@ -93,14 +94,14 @@ function getApi() {
                         uv.className = "severe inline";
                     }
 
-                    //Update the date
+                    //Update the date for 5 day forecast
                     $("#futuredate1").text(tomorrow.format("MM/DD/YY"));
                     $("#futuredate2").text(twoDays.format("MM/DD/YY"));
                     $("#futuredate3").text(threeDays.format("MM/DD/YY"));
                     $("#futuredate4").text(fourDays.format("MM/DD/YY"));
                     $("#futuredate5").text(fiveDays.format("MM/DD/YY"));
                     
-                    //set the icon up by pulling the code and using it along with the base url for the icons to create the correct url for the current icon
+                    //set the icon up in 5 day forecast by pulling the code and using it along with the base url for the icons to create the correct url for the current icon
                     var iconcode1 = data.daily[1].weather[0].icon;
                     var iconURL1 = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
                     $('#weatherIcon1').attr('src', iconURL1);
@@ -117,7 +118,7 @@ function getApi() {
                     var iconURL5 = "http://openweathermap.org/img/w/" + iconcode5 + ".png";
                     $('#weatherIcon5').attr('src', iconURL5);
 
-                    //Set the temp, wind, and humidity
+                    //Set the temp, wind, and humidity in 5 day forecast
                     temp1.textContent = "Temp: " + data.daily[1].temp.day + "\xB0F";
                     wind1.textContent = "Wind: " + data.daily[1].wind_speed + " MPH";
                     humidity1.textContent = "Humidity: " + data.daily[1].humidity + "%";
@@ -136,12 +137,27 @@ function getApi() {
             });
         }
         fetchOneCall();
+        var citybtn = document.createElement("button");
+        citybtn.textContent = data.name;
+        citybtn.className = "newCity";
+        buttonPlaceholder.appendChild(citybtn);
+        function saveCities() {
+            
+            
+            localStorage.setItem("savedCity[i]", );
+            
+            $(".newCity").each(function() {
+                $(".newCity").on("click", function(){
+                    localStorage.getItem("savedCity[i]");
+                })
+            });
+                
+        }
+        saveCities();   
     });
 }
 
-function saveCities() {
 
-}
   
 
   
