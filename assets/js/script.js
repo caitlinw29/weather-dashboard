@@ -2,6 +2,7 @@ var APIKey = "65566f3f953d22f68075807f0afd5b8b";
 var city;
 var lat;
 var lon;
+var cities = [];
 var searchButton = document.getElementById("search-button");
 var currentCity = document.getElementById("currentCity");
 var mainPage = document.getElementById("mainPage");
@@ -56,7 +57,7 @@ function getApi() {
         //Update the city name
         currentCity.textContent = data.name;
         //Update the date
-        $("#currentDate").text(today.format("(MM/DD/YY)"));
+        var currentDate = $("#currentDate").text(today.format("(MM/DD/YY)"));
         //update the temp, wind, and humidity
         temp.textContent = "Temp: " + data.main.temp + "\xB0F";
         wind.textContent = "Wind: " + data.wind.speed + " MPH";
@@ -142,9 +143,20 @@ function getApi() {
         citybtn.className = "newCity";
         buttonPlaceholder.appendChild(citybtn);
         function saveCities() {
+            cities = JSON.parse(localStorage.getItem("cities"));
+
+            var newCity = {
+                name: currentCity.textContent,
+                date: currentDate
+            };
+
+            console.log(newCity);
+
+            cities.push(newCity);
             
-            
-            localStorage.setItem("savedCity[i]", );
+            localStorage.setItem("savedCity[i]", JSON.stringify(cities));
+
+            JSON.parse(localStorage.getItem("cities"));
             
             $(".newCity").each(function() {
                 $(".newCity").on("click", function(){
