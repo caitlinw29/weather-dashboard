@@ -20,7 +20,11 @@ main {
 }
 
 aside {
-    width: 25%;
+    width: 100%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h2 {
@@ -33,17 +37,16 @@ h4 {
     font-size: 150%;
 }
 
-
 #city {
     display: block;
-    width: 100%;
+    width: 50%;
     margin-bottom: 10px;
     height: 40px;
     padding: 1%;
 }
 
 #search-button {
-    width: 100%;
+    width: 20%;
     background-color: rgb(41, 99, 223);
     color: whitesmoke;
     border: none;
@@ -71,6 +74,7 @@ h4 {
 #buttonPlaceholder {
     border-top: 3px solid rgb(11, 12, 53);
     padding-top: 20px;
+    width: 50%;
 }
 
 .newCity {
@@ -176,7 +180,7 @@ h4 {
 
     aside, 
     main {
-        width: 90%;
+        width: 90% !important;
     }
 
     #fiveDayForecast section{

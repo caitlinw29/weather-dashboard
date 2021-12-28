@@ -37,6 +37,12 @@ input.addEventListener("keyup", function(event) {
 });
 
 function getApi() {
+    //move aside components to left side
+    document.getElementById("search").setAttribute("style", "width: 25%; padding: 0");
+    searchButton.setAttribute("style", "width: 100%");
+    input.setAttribute("style", "width: 100%");
+    buttonPlaceholder.setAttribute("style", "width:100%");
+
     //Get user input and save it as the city
     city = input.value.trim();
     input.value = "";
@@ -181,5 +187,3 @@ function saveCities() {
     });
         
 }
-
-  
