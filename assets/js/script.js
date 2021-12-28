@@ -28,12 +28,18 @@ var temp5 = document.getElementById("future5temp");
 var wind5 = document.getElementById("future5wind");
 var humidity5 = document.getElementById("future5humidity");
 
+//on click of search button, or enter key is hit, run getApi()
 searchButton.addEventListener("click", getApi);
+input.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        searchButton.click();
+    }
+});
 
 function getApi() {
     //Get user input and save it as the city
     city = input.value.trim();
-    
+    input.value = "";
     //pass in the current city to the API call
     var cityUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
     var today = moment();
@@ -67,13 +73,17 @@ function getApi() {
         lon = data.coord.lon;
       
         fetchOneCall();
+        if(document.getElementById(data.name)){
+            return;
+        }
         var citybtn = document.createElement("button");
+        citybtn.setAttribute("id", data.name);
         citybtn.textContent = data.name;
         citybtn.className = "newCity";
         citybtn.setAttribute("style", "cursor: pointer")
         buttonPlaceholder.appendChild(citybtn);
        
-        saveCities();   
+        // saveCities();   
     });
 }
 
@@ -87,7 +97,6 @@ function fetchOneCall() {
             return response.json();
             })
         .then(function (data) {
-            console.log(data);
             var tomorrow  = moment().add(1,'days');
             var twoDays  = moment().add(2,'days');
             var threeDays  = moment().add(3,'days');
@@ -159,7 +168,6 @@ function saveCities() {
         date: currentDate
     };
 
-    console.log(newCity);
 
     cities.push(newCity);
     
