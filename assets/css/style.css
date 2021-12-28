@@ -1,5 +1,6 @@
 body {
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    cursor: default;
 }
 
 header {
@@ -47,6 +48,7 @@ h4 {
 #search-button:hover {
     background-color: rgb(44, 13, 102);
     transition: all 0.5s ease-in;
+    cursor: pointer;
 }
 
 .container {
