@@ -1,4 +1,4 @@
-# weather-dashboard
+# Weather Dashboard
 ## Description
 * Weather Dashboard is an interactive site that will allow the user to search for cities, see the current and future weather conditions for that city, and save favorite cities for future searches.
 
