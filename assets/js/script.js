@@ -12,21 +12,6 @@ var temp = document.getElementById("temp");
 var wind = document.getElementById("wind");
 var humidity = document.getElementById("humidity");
 var uv = document.getElementById("uv");
-var temp1 = document.getElementById("future1temp");
-var wind1 = document.getElementById("future1wind");
-var humidity1 = document.getElementById("future1humidity");
-var temp2 = document.getElementById("future2temp");
-var wind2 = document.getElementById("future2wind");
-var humidity2 = document.getElementById("future2humidity");
-var temp3 = document.getElementById("future3temp");
-var wind3 = document.getElementById("future3wind");
-var humidity3 = document.getElementById("future3humidity");
-var temp4 = document.getElementById("future4temp");
-var wind4 = document.getElementById("future4wind");
-var humidity4 = document.getElementById("future4humidity");
-var temp5 = document.getElementById("future5temp");
-var wind5 = document.getElementById("future5wind");
-var humidity5 = document.getElementById("future5humidity");
 
 //on click of search button, or enter key is hit, run getApi()
 searchButton.addEventListener("click", getApi);
@@ -45,6 +30,7 @@ function getApi() {
 
     //Get user input and save it as the city
     city = input.value.trim();
+    //clear input field
     input.value = "";
     //pass in the current city to the API call
     var cityUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey + "&units=imperial";
@@ -60,7 +46,7 @@ function getApi() {
         return response.json();
       })
       .then(function (data) {
-        //set the icon up by pulling the code and using it along with the base url for the icons to create the correct url for the current icon
+        //set the icon up by pulling the code and using it along with the base url for the icons to create the correct url for the current icon png
         var iconcode = data.weather[0].icon;
         var iconURL = "http://openweathermap.org/img/w/" + iconcode + ".png";
         $('#weatherIcon').attr('src', iconURL);
@@ -69,19 +55,20 @@ function getApi() {
         //Update the city name
         currentCity.textContent = data.name;
         //Update the date
-        var currentDate = $("#currentDate").text(today.format("(MM/DD/YY)"));
+        $("#currentDate").text(today.format("(MM/DD/YY)"));
         //update the temp, wind, and humidity
         temp.textContent = "Temp: " + data.main.temp + "\xB0F";
         wind.textContent = "Wind: " + data.wind.speed + " MPH";
         humidity.textContent = "Humidity: " + data.main.humidity + "%";
-        //set up the lat and lon to be pulled in the OneCallAPI URL
+        //set up the lat and lon to be pulled in the OneCallAPI URL below
         lat = data.coord.lat;
         lon = data.coord.lon;
-      
         fetchOneCall();
+        //if a button already exists for the city, return. We don't need to save it again.
         if(document.getElementById(data.name)){
             return;
         }
+        //otherwise, make a button and set up the id, textContent, and className
         var citybtn = document.createElement("button");
         citybtn.setAttribute("id", data.name);
         citybtn.textContent = data.name;
@@ -129,39 +116,35 @@ function fetchOneCall() {
             $("#futuredate4").text(fourDays.format("MM/DD/YY"));
             $("#futuredate5").text(fiveDays.format("MM/DD/YY"));
             
-            //set the icon up in 5 day forecast by pulling the code and using it along with the base url for the icons to create the correct url for the current icon
-            var iconcode1 = data.daily[1].weather[0].icon;
-            var iconURL1 = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
-            $('#weatherIcon1').attr('src', iconURL1);
-            var iconcode2 = data.daily[2].weather[0].icon;
-            var iconURL2 = "http://openweathermap.org/img/w/" + iconcode2 + ".png";
-            $('#weatherIcon2').attr('src', iconURL2);
-            var iconcode3 = data.daily[3].weather[0].icon;
-            var iconURL3 = "http://openweathermap.org/img/w/" + iconcode3 + ".png";
-            $('#weatherIcon3').attr('src', iconURL3);
-            var iconcode4 = data.daily[4].weather[0].icon;
-            var iconURL4 = "http://openweathermap.org/img/w/" + iconcode4 + ".png";
-            $('#weatherIcon4').attr('src', iconURL4);
-            var iconcode5 = data.daily[5].weather[0].icon;
-            var iconURL5 = "http://openweathermap.org/img/w/" + iconcode5 + ".png";
-            $('#weatherIcon5').attr('src', iconURL5);
+            //set the icon up in 5 day forecast 
+            //For each icon..
+            $("[data-icon]").each(function() {
+                //num is the number of the icon 1-5
+                var num = $(this).data("icon");
+                //plug num in to get the code for the day's icon
+                var iconCode = data.daily[num].weather[0].icon;
+                //plus iconCode in to the url
+                var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                //set the src of the current day's icon to be the iconURL
+                $(this).attr('src', iconURL);
+            })
 
             //Set the temp, wind, and humidity in 5 day forecast
-            temp1.textContent = "Temp: " + data.daily[1].temp.day + "\xB0F";
-            wind1.textContent = "Wind: " + data.daily[1].wind_speed + " MPH";
-            humidity1.textContent = "Humidity: " + data.daily[1].humidity + "%";
-            temp2.textContent = "Temp: " + data.daily[2].temp.day + "\xB0F";
-            wind2.textContent = "Wind: " + data.daily[2].wind_speed + " MPH";
-            humidity2.textContent = "Humidity: " + data.daily[2].humidity + "%";
-            temp3.textContent = "Temp: " + data.daily[3].temp.day + "\xB0F";
-            wind3.textContent = "Wind: " + data.daily[3].wind_speed + " MPH";
-            humidity3.textContent = "Humidity: " + data.daily[3].humidity + "%";
-            temp4.textContent = "Temp: " + data.daily[4].temp.day + "\xB0F";
-            wind4.textContent = "Wind: " + data.daily[4].wind_speed + " MPH";
-            humidity4.textContent = "Humidity: " + data.daily[4].humidity + "%";
-            temp5.textContent = "Temp: " + data.daily[5].temp.day + "\xB0F";
-            wind5.textContent = "Wind: " + data.daily[5].wind_speed + " MPH";
-            humidity5.textContent = "Humidity: " + data.daily[5].humidity + "%";
+            $("[data-temp]").each(function() {
+                //num is the number of the day 1-5
+                var num = $(this).data("temp");
+                $(this).text("Temp: " + data.daily[num].temp.day + "\xB0F");
+            })
+
+            $("[data-wind]").each(function() {
+                var num = $(this).data("wind");
+                $(this).text("Wind: " + data.daily[num].wind_speed + " MPH");
+            })
+
+            $("[data-humidity]").each(function() {
+                var num = $(this).data("humidity");
+                $(this).text("Humidity: " + data.daily[num].humidity + "%");
+            })
     });
 } 
 
