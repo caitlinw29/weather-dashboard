@@ -80,7 +80,6 @@ function getApi() {
         citybtn.setAttribute("id", data.name);
         citybtn.textContent = data.name;
         citybtn.className = "newCity";
-        citybtn.setAttribute("style", "cursor: pointer")
         buttonPlaceholder.appendChild(citybtn);
        
         // saveCities();   
