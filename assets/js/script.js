@@ -3,7 +3,7 @@ var city;
 var input = document.getElementById("city");
 var lat;
 var lon;
-var cities = [];
+var cities;
 var searchButton = document.getElementById("search-button");
 var currentCity = document.getElementById("currentCity");
 var mainPage = document.getElementById("mainPage");
@@ -13,23 +13,26 @@ var wind = document.getElementById("wind");
 var humidity = document.getElementById("humidity");
 var uv = document.getElementById("uv");
 
-//on click of search button, or enter key is hit, run getApi()
-searchButton.addEventListener("click", getApi);
+//on click of search button store city and run getApi with that city
+searchButton.addEventListener("click", function(){
+    //Get user input and save it as the city
+    city = input.value.trim();
+    getApi(city);
+});
+//enter key is hit, run getApi() by clicking searchButton
 input.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
         searchButton.click();
     }
 });
 
-function getApi() {
+function getApi(city) {
     //move aside components to left side
     document.getElementById("search").setAttribute("style", "width: 25%; padding: 0");
     searchButton.setAttribute("style", "width: 100%");
     input.setAttribute("style", "width: 100%");
     buttonPlaceholder.setAttribute("style", "width:100%");
 
-    //Get user input and save it as the city
-    city = input.value.trim();
     //clear input field
     input.value = "";
     //pass in the current city to the API call
@@ -75,7 +78,7 @@ function getApi() {
         citybtn.className = "newCity";
         buttonPlaceholder.appendChild(citybtn);
        
-        // saveCities();   
+        saveCities();   
     });
 }
 
@@ -149,24 +152,17 @@ function fetchOneCall() {
 } 
 
 function saveCities() {
-    cities = JSON.parse(localStorage.getItem("cities"));
+    var cities = JSON.parse(localStorage.getItem("cities")) || [];
 
-    var newCity = {
-        name: currentCity.textContent,
-        date: currentDate
-    };
-
+    var newCity = currentCity;
 
     cities.push(newCity);
     
-    localStorage.setItem("savedCity[i]", JSON.stringify(cities));
+    localStorage.setItem("cities", JSON.stringify(cities));
 
-    JSON.parse(localStorage.getItem("cities"));
     
-    $(".newCity").each(function() {
-        $(".newCity").on("click", function(){
-            localStorage.getItem("savedCity[i]");
-        })
-    });
-        
+    $(".newCity").on("click", function(){
+        city = this.id;
+        getApi(city);
+    })       
 }
