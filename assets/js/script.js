@@ -169,6 +169,7 @@ function makeButtons(){
     //clear old list
     removeAllChildNodes(buttonPlaceholder);
     cities = JSON.parse(localStorage.getItem("cities"));
+    cities = cities.sort();
     for (let i=0; i<cities.length; i++){
          //make a button and set up the id, textContent, and className
          var citybtn = document.createElement("button");
