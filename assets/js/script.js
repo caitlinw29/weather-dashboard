@@ -56,6 +56,8 @@ function getApi(city) {
         var iconcode = data.weather[0].icon;
         var iconURL = "http://openweathermap.org/img/w/" + iconcode + ".png";
         $('#weatherIcon').attr('src', iconURL);
+        //add a tooltip with the weather condition 
+        $('#currentIcon').find('.tooltiptext').text(data.weather[0].description);
         //Show mainPage since it was hidden until you click the button
         mainPage.className = "";
         //Update the city name
@@ -127,6 +129,8 @@ function fetchOneCall() {
                 var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
                 //set the src of the current day's icon to be the iconURL
                 $(this).attr('src', iconURL);
+                //set the span text to be the current weather conditions (tooltip)
+                $(this).next().text(data.daily[num].weather[0].description);
             })
 
             //Set the temp, wind, and humidity in 5 day forecast

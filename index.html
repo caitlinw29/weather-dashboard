@@ -28,7 +28,10 @@
                     <div>
                         <h2 id="currentCity" class="inline"></h2>
                         <h2 id="currentDate" class="inline"></h2>
-                        <img id="weatherIcon" src="" alt="Weather icon">   
+                        <div id="currentIcon" class="tooltip">
+                            <img id="weatherIcon" src="" alt="Weather icon"> 
+                            <span class="tooltiptext"></span>
+                        </div>  
                     </div>
                     <p id="temp"> </p>
                     <p id="wind"> </p>
@@ -41,35 +44,50 @@
                     <div id="forecastBoxContainer">
                         <section>
                             <h4 id="futuredate1"></h4>
-                            <img data-icon="1" src="" alt="Weather icon"> 
+                            <div class="tooltip">
+                                <img data-icon="1" src="" alt="Weather icon"> 
+                                <span class="tooltiptext"></span>
+                            </div>  
                             <p data-temp="1"></p>
                             <p data-wind="1"></p>
                             <p data-humidity="1"></p>
                         </section>
                         <section>
                             <h4 id="futuredate2"></h4>
-                            <img data-icon="2" src="" alt="Weather icon"> 
+                            <div class="tooltip">
+                                <img data-icon="2" src="" alt="Weather icon"> 
+                                <span class="tooltiptext"></span>
+                            </div>  
                             <p data-temp="2"></p>
                             <p data-wind="2"></p>
                             <p data-humidity="2"></p>
                         </section>
                         <section>
                             <h4 id="futuredate3"></h4>
-                            <img data-icon="3" src="" alt="Weather icon"> 
+                            <div class="tooltip">
+                                <img data-icon="3" src="" alt="Weather icon"> 
+                                <span class="tooltiptext"></span>
+                            </div>  
                             <p data-temp="3"></p>
                             <p data-wind="3"></p>
                             <p data-humidity="3"></p>
                         </section>
                         <section>
                             <h4 id="futuredate4"></h4>
-                            <img data-icon="4" src="" alt="Weather icon"> 
+                            <div class="tooltip">
+                                <img data-icon="4" src="" alt="Weather icon"> 
+                                <span class="tooltiptext"></span>
+                            </div>                              
                             <p data-temp="4"></p>
                             <p data-wind="4"></p>
                             <p data-humidity="4"></p>
                         </section>
                         <section>
                             <h4 id="futuredate5"></h4>
-                            <img data-icon="5" src="" alt="Weather icon"> 
+                            <div class="tooltip">
+                                <img data-icon="5" src="" alt="Weather icon"> 
+                                <span class="tooltiptext"></span>
+                            </div>                              
                             <p data-temp="5"></p>
                             <p data-wind="5"></p>
                             <p data-humidity="5"></p>
