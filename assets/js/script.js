@@ -12,19 +12,21 @@ var temp = document.getElementById("temp");
 var wind = document.getElementById("wind");
 var humidity = document.getElementById("humidity");
 var uv = document.getElementById("uv");
+var savedCity;
 
-//on click of search button store city and run getApi with that city
+//on click of search button, store city and run getApi for that city
 searchButton.addEventListener("click", function(){
     //Get user input and save it as the city
     city = input.value.trim();
     getApi(city);
 });
-//enter key is hit, run getApi() by clicking searchButton
+//enter key is hit, run getApi() by clicking search
 input.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
         searchButton.click();
     }
 });
+makeButtons();
 
 function getApi(city) {
     //move aside components to left side
@@ -49,6 +51,7 @@ function getApi(city) {
         return response.json();
       })
       .then(function (data) {
+        savedCity = data.name;
         //set the icon up by pulling the code and using it along with the base url for the icons to create the correct url for the current icon png
         var iconcode = data.weather[0].icon;
         var iconURL = "http://openweathermap.org/img/w/" + iconcode + ".png";
@@ -56,7 +59,7 @@ function getApi(city) {
         //Show mainPage since it was hidden until you click the button
         mainPage.className = "";
         //Update the city name
-        currentCity.textContent = data.name;
+        currentCity.textContent = savedCity;
         //Update the date
         $("#currentDate").text(today.format("(MM/DD/YY)"));
         //update the temp, wind, and humidity
@@ -68,20 +71,14 @@ function getApi(city) {
         lon = data.coord.lon;
         fetchOneCall();
         //if a button already exists for the city, return. We don't need to save it again.
-        if(document.getElementById(data.name)){
+        if(document.getElementById(savedCity)){
             return;
         }
-        //otherwise, make a button and set up the id, textContent, and className
-        var citybtn = document.createElement("button");
-        citybtn.setAttribute("id", data.name);
-        citybtn.textContent = data.name;
-        citybtn.className = "newCity";
-        buttonPlaceholder.appendChild(citybtn);
-       
-        saveCities();   
+        
+        saveCities();  
+        makeButtons(); 
     });
 }
-
 
 function fetchOneCall() {
     //Pull the lat and lon of the current city
@@ -151,18 +148,40 @@ function fetchOneCall() {
     });
 } 
 
+//save the city name to localStorage to use when making a button
 function saveCities() {
-    var cities = JSON.parse(localStorage.getItem("cities")) || [];
+    cities = JSON.parse(localStorage.getItem("cities")) || [];
 
-    var newCity = currentCity;
-
+    var newCity = savedCity;
     cities.push(newCity);
     
     localStorage.setItem("cities", JSON.stringify(cities));
+}
 
-    
-    $(".newCity").on("click", function(){
-        city = this.id;
-        getApi(city);
-    })       
+//for each city button, on click, run getApi with the city of the button
+$(".newCity").on("click", function(){
+    city = this.id;
+    getApi(city);
+})  
+
+//make buttons for each city and append to buttonPlaceholder
+function makeButtons(){
+    //clear old list
+    removeAllChildNodes(buttonPlaceholder);
+    cities = JSON.parse(localStorage.getItem("cities"));
+    for (let i=0; i<cities.length; i++){
+         //make a button and set up the id, textContent, and className
+         var citybtn = document.createElement("button");
+         citybtn.setAttribute("id", cities[i]);
+         citybtn.textContent = cities[i];
+         citybtn.className = "newCity";
+         buttonPlaceholder.appendChild(citybtn);
+    }
+}
+
+//remove the children of the buttonPlaceholder to clear the old list
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
 }
