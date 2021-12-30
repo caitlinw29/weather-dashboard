@@ -201,6 +201,10 @@ opacity: 1;
     background-color: rgb(200, 200, 200);
 }
 
+.status-icon:hover {
+    background-color: black;
+}
+
 .icon-danger {
     color: rgb(255, 70, 70);
 }
