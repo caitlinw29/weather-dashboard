@@ -196,7 +196,18 @@ function makeButtons(){
 }
 
 $(".deletion").on("click", function() {
-    this.parentNode.parentNode.removeChild(this.parentNode);
+    //remove the div if deletion is clicked
+    const btndelDiv = this.parentNode;
+    btndelDiv.parentNode.removeChild(this.parentNode);
+    //prevSibling is the button, target it's id for index
+    let prevSibling = this.previousElementSibling;
+    const index = cities.indexOf(prevSibling.id);
+    //if index exists, splice that index out of the array
+    if (index > -1) {
+        cities.splice(index, 1);
+    }
+    //save new array
+    localStorage.setItem("cities", JSON.stringify(cities));
 })
 
 //remove the children of the buttonPlaceholder to clear the old list
