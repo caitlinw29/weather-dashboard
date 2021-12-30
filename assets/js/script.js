@@ -186,12 +186,17 @@ function makeButtons(){
         //deletion will be an X to delete the saved city
         var deletion = document.createElement("span");
         deletion.innerHTML = "<i class='fas fa-times status-icon icon-danger'></i>";
+        deletion.className = "deletion";
         //append the button and deletion to the div, then append div to page
         btnPlusDelete.appendChild(citybtn);
         btnPlusDelete.appendChild(deletion);
         buttonPlaceholder.appendChild(btnPlusDelete);
     }
 }
+
+$(".deletion").on("click", function() {
+    console.log("this clicked");
+})
 
 //remove the children of the buttonPlaceholder to clear the old list
 function removeAllChildNodes(parent) {
