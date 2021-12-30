@@ -175,12 +175,21 @@ function makeButtons(){
     cities = JSON.parse(localStorage.getItem("cities"));
     cities = cities.sort();
     for (let i=0; i<cities.length; i++){
-         //make a button and set up the id, textContent, and className
-         var citybtn = document.createElement("button");
-         citybtn.setAttribute("id", cities[i]);
-         citybtn.textContent = cities[i];
-         citybtn.className = "newCity";
-         buttonPlaceholder.appendChild(citybtn);
+        //set up the div to hold the btn and deletion
+        var btnPlusDelete = document.createElement("div");
+        btnPlusDelete.className = "btnPlusDelete";
+        //make a button and set up the id, textContent, and className
+        var citybtn = document.createElement("button");
+        citybtn.setAttribute("id", cities[i]);
+        citybtn.textContent = cities[i];
+        citybtn.className = "newCity";
+        //deletion will be an X to delete the saved city
+        var deletion = document.createElement("span");
+        deletion.innerHTML = "<i class='fas fa-times status-icon icon-danger'></i>";
+        //append the button and deletion to the div, then append div to page
+        btnPlusDelete.appendChild(citybtn);
+        btnPlusDelete.appendChild(deletion);
+        buttonPlaceholder.appendChild(btnPlusDelete);
     }
 }
 

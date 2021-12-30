@@ -189,6 +189,22 @@ visibility: visible;
 opacity: 1;
 }
 
+/* Deletion */
+.btnPlusDelete {
+    display: flex;
+    justify-content: space-between;
+}
+
+.status-icon {
+    padding: 2px 5px;
+    margin-left: -100%;
+    background-color: rgb(200, 200, 200);
+}
+
+.icon-danger {
+    color: rgb(255, 70, 70);
+}
+
 @media screen and (max-width: 1100px) {
     #forecastBoxContainer {
         flex-wrap: wrap;
@@ -222,8 +238,13 @@ opacity: 1;
         flex-wrap: wrap;
         width: 100%;
     }
-    .newCity {
+    .btnPlusDelete {
         width: 48%;
         margin: 1%;
+    }
+
+    .status-icon {
+        padding: 0px;
+        font-size: 120%;
     }
 }
