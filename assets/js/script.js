@@ -13,6 +13,7 @@ var wind = document.getElementById("wind");
 var humidity = document.getElementById("humidity");
 var uv = document.getElementById("uv");
 var savedCity;
+var btnPlusDelete;
 
 //on click of search button, store city and run getApi for that city
 searchButton.addEventListener("click", function(){
@@ -176,7 +177,7 @@ function makeButtons(){
     cities = cities.sort();
     for (let i=0; i<cities.length; i++){
         //set up the div to hold the btn and deletion
-        var btnPlusDelete = document.createElement("div");
+        btnPlusDelete = document.createElement("div");
         btnPlusDelete.className = "btnPlusDelete";
         //make a button and set up the id, textContent, and className
         var citybtn = document.createElement("button");
@@ -195,7 +196,7 @@ function makeButtons(){
 }
 
 $(".deletion").on("click", function() {
-    console.log("this clicked");
+    this.parentNode.parentNode.removeChild(this.parentNode);
 })
 
 //remove the children of the buttonPlaceholder to clear the old list
