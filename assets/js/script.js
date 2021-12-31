@@ -66,8 +66,11 @@ function getApi(city) {
         //Update the date
         $("#currentDate").text(today.format("(MM/DD/YY)"));
         //update the temp, wind, and humidity
-        temp.textContent = "Temp: " + data.main.temp + "\xB0F";
-        wind.textContent = "Wind: " + data.wind.speed + " MPH";
+        //conversions for celsius and kp/h
+        var curCTemp = convertTemp(data.main.temp);
+        var curKPH = convertSpeed(data.wind.speed);
+        temp.textContent = "Temp: " + data.main.temp.toFixed() + "\xB0F / " + curCTemp + "\xB0C";
+        wind.textContent = "Wind: " + data.wind.speed.toFixed() + " MPH / " + curKPH + " KPH";
         humidity.textContent = "Humidity: " + data.main.humidity + "%";
         //set up the lat and lon to be pulled in the OneCallAPI URL below
         lat = data.coord.lat;
@@ -138,12 +141,14 @@ function fetchOneCall() {
             $("[data-temp]").each(function() {
                 //num is the number of the day 1-5
                 var num = $(this).data("temp");
-                $(this).text("Temp: " + data.daily[num].temp.day + "\xB0F");
+                var dailyCTemp = convertTemp(data.daily[num].temp.day);
+                $(this).text("Temp: " + data.daily[num].temp.day.toFixed() + "\xB0F / " + dailyCTemp + "\xB0C");
             })
 
             $("[data-wind]").each(function() {
                 var num = $(this).data("wind");
-                $(this).text("Wind: " + data.daily[num].wind_speed + " MPH");
+                var dailyKPH = convertSpeed(data.daily[num].wind_speed);
+                $(this).text("Wind: " + data.daily[num].wind_speed.toFixed() + " MPH / " + dailyKPH + " KPH");
             })
 
             $("[data-humidity]").each(function() {
@@ -215,4 +220,14 @@ function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
+}
+
+//functions for converting F to C and MPH to KPH
+function convertTemp(fahrenheit){
+    var celsius = ((fahrenheit - 32) * .5556).toFixed();
+    return celsius;
+}
+function convertSpeed(mph){
+    var kph = (mph * 1.609344).toFixed();
+    return kph;
 }
