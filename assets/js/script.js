@@ -19,7 +19,13 @@ var btnPlusDelete;
 searchButton.addEventListener("click", function(){
     //Get user input and save it as the city
     city = input.value.trim();
-    getApi(city);
+    //if someone tries to do city, state -> accept the city
+    if (city.includes(",")){
+        var commas = city.split(",");
+        getApi(commas[0]);
+    } else {
+        getApi(city);
+    }
 });
 //enter key is hit, run getApi() by clicking search
 input.addEventListener("keyup", function(event) {
